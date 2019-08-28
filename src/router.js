@@ -1,7 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import Pos from './views/pos/Login.vue'
+import About from './views/About.vue'
+import POSLogin from './views/pos/Login.vue'
+import POS from './views/pos/Dashboard.vue'
+import Test from './views/pos/Test.vue'
+import AdminLogin from './views/admin/Login.vue'
 
 Vue.use(Router)
 
@@ -15,17 +19,31 @@ export default new Router({
       component: Home
     },
     {
-      path: '/pos',
-      name: 'pos',
-      component: Pos
-    },
-    {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    }
+      component: About
+    },
+    {
+      path: '/pos-login',
+      name: 'pos-login',
+      component: POSLogin
+    },
+    {
+      path: '/pos',
+      name: 'pos',
+      component: POS,
+      children: [
+        {
+          path: 'test',
+          component: Test
+        }
+      ]
+    },
+    {
+      path: '/admin-login',
+      name: 'admin-login',
+      component: AdminLogin
+    },
+    
   ]
 })

@@ -5,7 +5,7 @@
                 <v-col sm="auto">
                     <v-form ref="form" v-model="valid" lazy-validation>
                         <v-card width="500px">
-                            <v-card-title>Log in to POS</v-card-title>
+                            <v-card-title>Log in to Admin</v-card-title>
                             <v-card-text>I'm card text</v-card-text>
 
                             <div class="px-4 mb-4">
@@ -20,10 +20,6 @@
                         </v-card>
                     </v-form>
                     
-                    <v-snackbar v-model="snackbar">
-                        {{ text }}
-                        <v-btn color="pink" text @click="snackbar = false">Close</v-btn>
-                    </v-snackbar>
                 </v-col>
             </v-row>
         </v-content>
@@ -44,14 +40,11 @@ export default {
             v => !!v || 'Password is required',
             v => (v && v.length >= 6) || 'Password must be greater than 6 characters',
         ],
-        snackbar: false,
-        text: 'Hello, I\'m a snackbar',
     }),
     methods: {
         submit () {
             if (this.$refs.form.validate()) {
-                this.snackbar = true;
-                this.$router.push('/pos');
+                this.snackbar = true
             }
         },
         reset () {
