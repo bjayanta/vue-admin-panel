@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar app flat>
+    <v-app-bar app flat color="grey lighten-5">
         <v-toolbar-title class="headline text-uppercase">
             <span>Company </span>
             <span class="font-weight-light">Name</span>

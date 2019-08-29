@@ -1,6 +1,6 @@
 <template>
     <nav>
-        <v-toolbar flat>
+        <v-toolbar flat color="grey lighten-5">
             <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
             <v-toolbar-title>Company name</v-toolbar-title>
@@ -39,7 +39,7 @@
                             <v-list-item-title>{{ link.text }}</v-list-item-title>
                         </v-list-item>
 
-                        <v-list-item router to="/pos-login">
+                        <v-list-item router :to="{name: 'pos.login'}">
                             <v-list-item-title>Sign out &nbsp;</v-list-item-title>
                             <v-icon right>mdi-exit-to-app</v-icon>
                         </v-list-item>
@@ -69,7 +69,7 @@
             <v-subheader>Basic</v-subheader>
 
             <v-list dense>
-                <v-list-item v-for="item in items" :key="item.title" to="/" link>
+                <v-list-item v-for="item in items" :key="item.title" router :to="item.router" link>
                     <v-list-item-icon>
                         <v-icon>{{ item.icon }}</v-icon>
                     </v-list-item-icon>
@@ -79,32 +79,18 @@
                     </v-list-item-content>
                 </v-list-item>
 
-                <v-list-item router to="/pos/test" link>
-                    <v-list-item-icon>
-                        <v-icon>mdi-home</v-icon>
-                    </v-list-item-icon>
-
-                    <v-list-item-content>
-                        <v-list-item-title>Test</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
-
                 <v-divider></v-divider>
                 <v-subheader>Application</v-subheader>
 
-                <v-list-group prepend-icon="mdi-apps" no-action>
-                    <template v-slot:activator>
-                        <v-list-item-title>Teamwork</v-list-item-title>
-                    </template>
+                <v-list-item v-for="app in applications" :key="app.title" router :to="item.router" link>
+                    <v-list-item-icon>
+                        <v-icon>{{ app.icon }}</v-icon>
+                    </v-list-item-icon>
 
-                    <v-list-item router to="/project">
-                        <v-list-item-title>Project</v-list-item-title>
-                    </v-list-item>
-
-                    <v-list-item router to="/team">
-                        <v-list-item-title>Team</v-list-item-title>
-                    </v-list-item>
-                </v-list-group>
+                    <v-list-item-content>
+                        <v-list-item-title>{{ app.title }}</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
 
                 <v-divider></v-divider>
                 <v-subheader>Account </v-subheader>
@@ -185,8 +171,11 @@
                 mini: false,
                 drawer: null,
                 items: [
-                    { title: 'Dashboard', icon: 'mdi-home' },
-                    { title: 'About', icon: 'mdi-information' },
+                    { title: 'Dashboard', icon: 'mdi-home', router: {name: 'pos'} },
+                    { title: 'Messages', icon: 'mdi-home', router: {name: 'messages'} },
+                ],
+                applications: [
+                    { title: 'Product', icon: 'mdi-information', router: {name: 'pos.product'} },
                 ],
                 links: [
                     {icon: 'mdi-home', text: 'Dashboard', route: '/'},

@@ -1,6 +1,6 @@
 <template>
     <v-footer class="pa-0" width="100%">
-        <v-card flat width="100%" class="text-center">
+        <v-card flat width="100%" class="text-center grey lighten-5">
             <v-card-text>
                 <router-link to="/">Home</router-link>
                 <router-link to="/about">About</router-link>

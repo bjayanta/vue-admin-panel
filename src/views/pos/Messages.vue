@@ -1,9 +1,10 @@
 <template>
-    <h1>Hello World!</h1>
+    <h1>I am Messages page.</h1>
 </template>
 
 <script>
 export default {
+    name: 'messages'
 
 };
 </script>

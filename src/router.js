@@ -2,48 +2,21 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import About from './views/About.vue'
-import POSLogin from './views/pos/Login.vue'
-import POS from './views/pos/Dashboard.vue'
-import Test from './views/pos/Test.vue'
-import AdminLogin from './views/admin/Login.vue'
+
+import POSRoutes from './views/pos/router' // POS router
+import AdminRouter from './views/admin/router' // Admin Router
 
 Vue.use(Router)
+
+const baseRoutes = [
+  { path: '/', name: 'home', component: Home },
+  { path: '/about', name: 'about', component: About },
+];
+
+const routes = baseRoutes.concat(POSRoutes, AdminRouter);
 
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: About
-    },
-    {
-      path: '/pos-login',
-      name: 'pos-login',
-      component: POSLogin
-    },
-    {
-      path: '/pos',
-      name: 'pos',
-      component: POS,
-      children: [
-        {
-          path: 'test',
-          component: Test
-        }
-      ]
-    },
-    {
-      path: '/admin-login',
-      name: 'admin-login',
-      component: AdminLogin
-    },
-    
-  ]
+  routes
 })

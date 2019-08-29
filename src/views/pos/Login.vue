@@ -1,37 +1,54 @@
 <template>
-    <v-app>
-        <v-content>
-            <v-row align="center" justify="center" style="height: 100%;">
-                <v-col sm="auto">
-                    <v-form ref="form" v-model="valid" lazy-validation>
-                        <v-card width="500px">
-                            <v-card-title>Log in to POS</v-card-title>
-                            <v-card-text>I'm card text</v-card-text>
+    <v-content>
+        <v-row>
+            <Header />
+        </v-row>
 
-                            <div class="px-4 mb-4">
-                                <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
-                                <v-text-field v-model="password" :rules="passRules" label="Password" required></v-text-field>
-                            </div>
-                                
-                            <v-card-actions class="pb-5">
-                                <v-btn :disabled="!valid" color="success" class="ml-2" @click="submit">Login</v-btn>
-                                <v-btn color="error" class="mr-2" @click="reset">Reset</v-btn>
-                            </v-card-actions>
-                        </v-card>
-                    </v-form>
+        <v-row align="center" justify="center" style="height: 768px;">
+            <v-card width="500">
+                <v-form ref="form" v-model="valid" lazy-validation>
+                <v-card-title>Log in to POS</v-card-title>
+                <v-card-text>This panel only for users.</v-card-text>
+
+                <div class="px-4 mb-4">
+                    <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
+
+                    <v-text-field 
+                        v-model="password" 
+                        :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'" 
+                        :rules="passRules" 
+                        :type="show ? 'text' : 'password'"
+                        label="Password" 
+                        hint="At least 6 characters"
+                        counter
+                        @click:append="show = !show"
+                        required></v-text-field>
+                </div>
                     
-                    <v-snackbar v-model="snackbar">
-                        {{ text }}
-                        <v-btn color="pink" text @click="snackbar = false">Close</v-btn>
-                    </v-snackbar>
-                </v-col>
-            </v-row>
-        </v-content>
-    </v-app>
+                <v-card-actions class="pb-5">
+                    <v-btn :disabled="!valid" color="success" class="ml-2" @click="submit">Login</v-btn>
+                    <v-btn color="error" class="mr-2" @click="reset">Reset</v-btn>
+                </v-card-actions>
+                </v-form>
+            </v-card>
+        </v-row>
+
+        <v-row>
+            <Footer />
+        </v-row>
+    </v-content>
 </template>
 
 <script>
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+
 export default {
+    name: 'pos-login',
+    components: {
+        Header,
+        Footer,
+    },
     data: () => ({
         valid: true,
         email: '',
@@ -39,6 +56,7 @@ export default {
             v => !!v || 'E-mail is required',
             v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
         ],
+        show: false,
         password: '',
         passRules: [
             v => !!v || 'Password is required',
