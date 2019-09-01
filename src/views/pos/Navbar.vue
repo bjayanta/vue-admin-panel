@@ -60,8 +60,8 @@
                 </v-list-item-content>
 
                 <v-btn icon @click.stop="mini = !mini">
-                        <v-icon>mdi-chevron-left</v-icon>
-                    </v-btn>
+                    <v-icon>mdi-chevron-left</v-icon>
+                </v-btn>
             </v-list-item>
 
             <v-divider></v-divider>
@@ -82,13 +82,13 @@
                 <v-divider></v-divider>
                 <v-subheader>Application</v-subheader>
 
-                <v-list-item v-for="app in applications" :key="app.title" router :to="item.router" link>
+                <v-list-item v-for="menu in aside.modules" :key="menu.title" router :to="menu.router" link>
                     <v-list-item-icon>
-                        <v-icon>{{ app.icon }}</v-icon>
+                        <v-icon>{{ menu.icon }}</v-icon>
                     </v-list-item-icon>
 
                     <v-list-item-content>
-                        <v-list-item-title>{{ app.title }}</v-list-item-title>
+                        <v-list-item-title>{{ menu.title }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
 
@@ -170,12 +170,14 @@
             return {
                 mini: false,
                 drawer: null,
+                aside: {
+                    modules: [
+                        { title: 'Product', icon: 'mdi-information', router: {name: 'pos.product.index'} },
+                    ],
+                },
                 items: [
                     { title: 'Dashboard', icon: 'mdi-home', router: {name: 'pos'} },
                     { title: 'Messages', icon: 'mdi-home', router: {name: 'messages'} },
-                ],
-                applications: [
-                    { title: 'Product', icon: 'mdi-information', router: {name: 'pos.product'} },
                 ],
                 links: [
                     {icon: 'mdi-home', text: 'Dashboard', route: '/'},
