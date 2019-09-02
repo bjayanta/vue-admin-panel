@@ -29,8 +29,15 @@
                     </v-row>
 
                     <v-row>
-                        <v-col>
-                            <v-card></v-card>
+                        <v-col v-for="product in products" :key="product.id">
+                            <v-card class="mx-4">
+                                <v-card-title>{{ product.name }}</v-card-title>
+                                <v-card-text>BDT {{ product.price }}, {{ product.description }}</v-card-text>
+
+                                <v-card-actions>
+                                    <v-btn text>Add to cart</v-btn>
+                                </v-card-actions>
+                            </v-card>
                         </v-col>
                     </v-row>
                 </v-card>
@@ -55,6 +62,7 @@ export default {
             ],
             brand: '',
             brands: [],
+            products: [],
         }
     },
     methods: {
@@ -71,6 +79,14 @@ export default {
         },
         getProducts(brand) {
             console.log(brand);
+
+            this.products = [
+                {id: 1, brand_id: 1, category: 1, name: 'Beverages', price: 10.50},
+                {id: 2, brand_id: 1, category: 1, name: 'Snacks', price: 10.50},
+                {id: 3, brand_id: 1, category: 1, name: 'Culinary', price: 10.50},
+                {id: 4, brand_id: 1, category: 1, name: 'Sugar Confectionery', price: 10.50},
+                {id: 5, brand_id: 1, category: 1, name: 'Biscuit and Bakery', price: 10.50},
+            ];
         }
     }
 
